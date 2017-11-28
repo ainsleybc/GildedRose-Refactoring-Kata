@@ -69,12 +69,18 @@ describe("Shop", function () {
           expect(shop.updateQuality()).toContain(updatedItem);
         })
         it('increases the quality of Backstage passes by 3 if sellIn < 5', function () {
-          updatedItem = { name: backStage, sellIn:4, quality: 8 };        
+          updatedItem = { name: backStage, sellIn: 4, quality: 8 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
         it('will not allow thw quality to be greater than 50', function () {
-          item.quality = 50;
+          item.quality = 49;
           updatedItem = { name: backStage, sellIn: 4, quality: 50 };        
+          expect(shop.updateQuality()).toContain(updatedItem);
+        })
+        it('decrease quality if sellIn > 10', function () {
+          item.sellIn = 12;
+          item.quality = 5;
+          updatedItem = { name: backStage, sellIn: 6, quality: 11 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
 
@@ -111,6 +117,7 @@ describe("Shop", function () {
           updatedItem = { name: brie, sellIn: -1, quality: 7 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
+
       })
 
     })
