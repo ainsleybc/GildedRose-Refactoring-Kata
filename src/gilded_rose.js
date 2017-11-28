@@ -21,11 +21,11 @@ class Shop {
         sellIn: 1
       },
       Backstage: {
-        dayLimits: [11, 6],
         qualityDecrease: 0,
         qualityIncrease: 1,
-        zeroQuality: 1,
-        sellIn: 1
+        sellIn: 1,
+        dayLimits: [11, 6],
+        zeroQuality: 1
       }
     }
   }
@@ -42,20 +42,17 @@ class Shop {
         for (var i = 0; i < rule.sellIn; i++) {
           this.updateSellIn(item);
         }
-
-        console.log(itemCategory)
-      if (item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert') {
-            for (var i = 0; i < rule.qualityDecrease; i++) {
-              this.decrementQuality(item);
-            }
-      } else {
+        for (var i = 0; i < rule.qualityDecrease; i++) {
+          this.decrementQuality(item);
+        }
+        for (var i = 0; i < rule.qualityIncrease; i++) {
           this.incrementQuality(item)
-          if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
-            rule.dayLimits.forEach(function (limit) {
-              if (item.sellIn < limit) this.incrementQuality(item)  
-            }, this)
-          }
-      }
+        }
+        if (rule.dayLimits) {
+          rule.dayLimits.forEach(function (limit) {
+            if (item.sellIn < limit) this.incrementQuality(item)  
+          }, this)
+        }
 
       if (item.sellIn < 0) {
         if (item.name != 'Aged Brie') {
