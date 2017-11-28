@@ -52,7 +52,7 @@ class Shop {
               this.decrementQuality(item);
             }
           } else {
-            item.quality = item.quality - item.quality;
+            this.zeroQuality(item);
           }
         } else {
           this.updateBrie(item);
@@ -78,6 +78,10 @@ class Shop {
 
   decrementQuality(item) {
     if (item.quality > 0) item.quality--;
+  }
+
+  zeroQuality(item) {
+    item.quality = 0;
   }
 
 }
