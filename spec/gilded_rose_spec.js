@@ -1,3 +1,8 @@
+'use strict';
+
+var Shop = require('../src/gilded_rose').Shop;
+var Item = require('../src/gilded_rose').Item;
+
 describe("Gilded Rose", function() {
 
   it("should foo", function() {

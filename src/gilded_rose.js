@@ -60,3 +60,8 @@ class Shop {
     return this.items;
   }
 }
+
+module.exports = {
+  Shop: Shop,
+  Item: Item
+}

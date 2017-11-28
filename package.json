@@ -1,0 +1,26 @@
+{
+  "name": "gildedrose-refactoring-kata",
+  "version": "1.0.0",
+  "description": "gilded rose kata - js",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "nyc jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ainsleybc/GildedRose-Refactoring-Kata.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ainsleybc/GildedRose-Refactoring-Kata/issues"
+  },
+  "homepage": "https://github.com/ainsleybc/GildedRose-Refactoring-Kata#readme",
+  "devDependencies": {
+    "jasmine": "^2.8.0",
+    "nyc": "^11.3.0"
+  }
+}
