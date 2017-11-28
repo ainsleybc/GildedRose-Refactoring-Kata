@@ -1,9 +1,8 @@
 'use strict';
 
 const Shop = require('../src/gilded_rose').Shop;
-const Item = require('../src/item').Item;
 
-describe("Gilded Rose", function () {
+describe("Shop", function () {
   
   var item, shop, items;
 
@@ -11,12 +10,6 @@ describe("Gilded Rose", function () {
     item = {name: 'foo'};
     shop = new Shop([item]);
   })
-
-  it("should foo", function () {
-    const gildedRose = new Shop([item]);
-    items = gildedRose.updateQuality();
-    expect(items[0].name).toEqual("foo");
-  });
 
   describe('updateQuality', function () {
     
