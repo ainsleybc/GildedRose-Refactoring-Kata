@@ -80,7 +80,7 @@ describe("Shop", function () {
         it('decrease quality if sellIn > 10', function () {
           item.sellIn = 12;
           item.quality = 5;
-          updatedItem = { name: backStage, sellIn: 6, quality: 11 };        
+          updatedItem = { name: backStage, sellIn: 11, quality: 6 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
 
