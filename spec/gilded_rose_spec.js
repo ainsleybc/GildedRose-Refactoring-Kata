@@ -35,6 +35,16 @@ describe("Shop", function () {
         expect(shop.updateQuality()).toContain(updatedItem);
       })
 
+      describe('Sulfuras', function () {
+        
+        it('never reduces the quality or sellIn value', function () {
+          item.name = 'Sulfuras, Hand of Ragnaros';
+          updatedItem = { name: 'Sulfuras, Hand of Ragnaros', sellIn: 5, quality: 5 };        
+          expect(shop.updateQuality()).toContain(updatedItem);
+        })
+
+      })
+
       describe('Backstage passes', function () {
 
         beforeEach(() => {
