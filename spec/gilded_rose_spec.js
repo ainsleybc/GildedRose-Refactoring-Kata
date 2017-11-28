@@ -35,16 +35,14 @@ describe("Shop", function () {
 
       describe('Aged Brie', function () {
 
-        beforeEach(function () {
-          item.name = brie;
-          item.quality = 49;  
-        })
+        beforeEach(function () { item.name = brie; })
 
         it('increases the quality of Brie', function () {
-          updatedItem = { name: brie, sellIn: 4, quality: 50 };        
+          updatedItem = { name: brie, sellIn: 4, quality: 6 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
         it('will not allow thw quality to be greater than 50', function () {
+          item.quality = 49;            
           updatedItem = { name: brie, sellIn: 4, quality: 50 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
@@ -63,9 +61,7 @@ describe("Shop", function () {
 
       describe('Backstage passes', function () {
 
-        beforeEach(() => {
-          item.name = backStage;
-        })     
+        beforeEach(() => { item.name = backStage; })     
 
         it('increases the quality of Backstage passes by 2 if sellIn < 10', function () {
           item.sellIn = 7;
@@ -106,6 +102,17 @@ describe("Shop", function () {
         })
 
       })
+
+      describe('Aged Brie', function () {
+
+        beforeEach(() => { item.name = brie; })    
+
+        it('increases the quality twice as fast', function () {
+          updatedItem = { name: brie, sellIn: -1, quality: 7 };        
+          expect(shop.updateQuality()).toContain(updatedItem);
+        })
+      })
+
     })
 
   })
