@@ -14,6 +14,10 @@ describe("Shop", function () {
     shop = new Shop([item]);
   })
 
+  it('initializes with an empty list of items', function () {
+    expect(new Shop().items).toEqual([]);
+  })
+
   describe('updateQuality', function () {
     
 
