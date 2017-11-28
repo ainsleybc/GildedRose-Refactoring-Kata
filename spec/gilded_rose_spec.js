@@ -65,6 +65,13 @@ describe("Shop", function () {
           updatedItem = { name: sulfuras, sellIn: 5, quality: 5 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
+        it('never reduces the quality or sellIn value', function () {
+          item.name = sulfuras;
+          item.quality = 2;
+          item.sellIn = -1;
+          updatedItem = { name: sulfuras, sellIn: -1, quality: 2 };        
+          expect(shop.updateQuality()).toContain(updatedItem);
+        })
 
       })
 
