@@ -4,10 +4,13 @@ const Shop = require('../src/gilded_rose').Shop;
 
 describe("Shop", function () {
   
-  var item, updatedItem, shop, name;
+  var item, updatedItem, shop, backStage, brie, sulfuras;
   
   beforeEach(function () {
     item = { name: 'foo', quality: 5, sellIn: 5 };
+    backStage = 'Backstage passes to a TAFKAL80ETC concert';    
+    brie = 'Aged Brie';
+    sulfuras = 'Sulfuras, Hand of Ragnaros';
     shop = new Shop([item]);
   })
 
@@ -33,16 +36,16 @@ describe("Shop", function () {
       describe('Aged Brie', function () {
 
         beforeEach(function () {
-          item.name = 'Aged Brie';
+          item.name = brie;
           item.quality = 49;  
         })
 
         it('increases the quality of Brie', function () {
-          updatedItem = { name: 'Aged Brie', sellIn: 4, quality: 50 };        
+          updatedItem = { name: brie, sellIn: 4, quality: 50 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
         it('will not allow thw quality to be greater than 50', function () {
-          updatedItem = { name: 'Aged Brie', sellIn: 4, quality: 50 };        
+          updatedItem = { name: brie, sellIn: 4, quality: 50 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
 
@@ -51,8 +54,8 @@ describe("Shop", function () {
       describe('Sulfuras', function () {
         
         it('never reduces the quality or sellIn value', function () {
-          item.name = 'Sulfuras, Hand of Ragnaros';
-          updatedItem = { name: 'Sulfuras, Hand of Ragnaros', sellIn: 5, quality: 5 };        
+          item.name = sulfuras;
+          updatedItem = { name: sulfuras, sellIn: 5, quality: 5 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
 
@@ -61,22 +64,21 @@ describe("Shop", function () {
       describe('Backstage passes', function () {
 
         beforeEach(() => {
-          name = 'Backstage passes to a TAFKAL80ETC concert';
-          item.name = name;
+          item.name = backStage;
         })     
 
         it('increases the quality of Backstage passes by 2 if sellIn < 10', function () {
           item.sellIn = 7;
-          updatedItem = { name: name, sellIn: 6, quality: 7 };        
+          updatedItem = { name: backStage, sellIn: 6, quality: 7 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
         it('increases the quality of Backstage passes by 3 if sellIn < 5', function () {
-          updatedItem = { name: name, sellIn:4, quality: 8 };        
+          updatedItem = { name: backStage, sellIn:4, quality: 8 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
         it('will not allow thw quality to be greater than 50', function () {
           item.quality = 50;
-          updatedItem = { name: name, sellIn: 4, quality: 50 };        
+          updatedItem = { name: backStage, sellIn: 4, quality: 50 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
 
@@ -95,14 +97,11 @@ describe("Shop", function () {
 
       describe('Backstage passes', function () {
 
-        beforeEach(() => {
-          name = 'Backstage passes to a TAFKAL80ETC concert';
-          item.name = name;
-        })     
+        beforeEach(() => { item.name = backStage; })     
         
         it('reduces the quality to 0', function () {
           item.sellIn = 0;
-          updatedItem = { name: name, sellIn: -1, quality: 0 };        
+          updatedItem = { name: backStage, sellIn: -1, quality: 0 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
 
