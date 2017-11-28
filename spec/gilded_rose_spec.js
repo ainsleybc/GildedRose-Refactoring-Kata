@@ -75,7 +75,7 @@ describe("Shop", function () {
           expect(shop.updateQuality()).toContain(updatedItem);
         })
         it('will not allow thw quality to be greater than 50', function () {
-          item.quality = 50
+          item.quality = 50;
           updatedItem = { name: name, sellIn: 4, quality: 50 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
@@ -88,6 +88,11 @@ describe("Shop", function () {
       
       beforeEach(() => { item.sellIn = 0; })
 
+      it('reduces the quality of an item twice as fast', function () {
+        updatedItem = { name: 'foo', sellIn: -1, quality: 3 };
+        expect(shop.updateQuality()).toContain(updatedItem);
+      })
+
       describe('Backstage passes', function () {
 
         beforeEach(() => {
@@ -95,7 +100,7 @@ describe("Shop", function () {
           item.name = name;
         })     
         
-        it('reduces the quality to 0 when the sell by date passes', function () {
+        it('reduces the quality to 0', function () {
           item.sellIn = 0;
           updatedItem = { name: name, sellIn: -1, quality: 0 };        
           expect(shop.updateQuality()).toContain(updatedItem);
