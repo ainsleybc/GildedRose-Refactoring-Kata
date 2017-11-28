@@ -36,7 +36,7 @@ describe("Shop", function () {
           item.name = 'Aged Brie';
           item.quality = 49;  
         })
-        
+
         it('increases the quality of Brie', function () {
           updatedItem = { name: 'Aged Brie', sellIn: 4, quality: 50 };        
           expect(shop.updateQuality()).toContain(updatedItem);
@@ -72,6 +72,11 @@ describe("Shop", function () {
         })
         it('increases the quality of Backstage passes by 3 if sellIn < 5', function () {
           updatedItem = { name: name, sellIn:4, quality: 8 };        
+          expect(shop.updateQuality()).toContain(updatedItem);
+        })
+        it('will not allow thw quality to be greater than 50', function () {
+          item.quality = 50
+          updatedItem = { name: name, sellIn: 4, quality: 50 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
 
