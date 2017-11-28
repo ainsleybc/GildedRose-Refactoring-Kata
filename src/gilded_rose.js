@@ -23,6 +23,7 @@ class Shop {
       Backstage: {
         qualityDecrease: 0,
         qualityIncrease: 1,
+        zeroQuality: 1,
         sellIn: 1
       }
     }
@@ -60,13 +61,14 @@ class Shop {
 
       if (item.sellIn < 0) {
         if (item.name != 'Aged Brie') {
-          if (item.name != 'Backstage passes to a TAFKAL80ETC concert') {
             for (var i = 0; i < rule.qualityDecrease; i++) {
               this.decrementQuality(item);
             }
-          } else {
-            this.zeroQuality(item);
-          }
+            if (rule.zeroQuality) {
+              for (var i = 0; i < rule.zeroQuality; i++) {
+                this.zeroQuality(item);
+              }
+            }  
         } else {
           for (var i = 0; i < rule.qualityIncrease; i++) {
             this.incrementQuality(item);
