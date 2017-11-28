@@ -8,10 +8,22 @@ class Shop {
       Default: {
         qualityDecrease: 1,
         qualityIncrease: 0,
+        sellIn: 1
       },
       "Sulfuras,": {
         qualityDecrease: 0,
         qualityIncrease: 0,
+        sellIn: 0
+      },
+      Aged: {
+        qualityDecrease: 0,
+        qualityIncrease: 1,
+        sellIn: 1
+      },
+      Backstage: {
+        qualityDecrease: 0,
+        qualityIncrease: 1,
+        sellIn: 1
       }
     }
   }
@@ -25,10 +37,11 @@ class Shop {
 
       var rule = this.itemRules[itemCategory] || this.itemRules.Default;
 
-      if (item.name != 'Sulfuras, Hand of Ragnaros') {
-        this.updateSellIn(item);
-      }
+        for (var i = 0; i < rule.sellIn; i++) {
+          this.updateSellIn(item);
+        }
 
+        console.log(itemCategory)
       if (item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert') {
             for (var i = 0; i < rule.qualityDecrease; i++) {
               this.decrementQuality(item);
@@ -55,17 +68,15 @@ class Shop {
             this.zeroQuality(item);
           }
         } else {
-          this.updateBrie(item);
+          for (var i = 0; i < rule.qualityIncrease; i++) {
+            this.incrementQuality(item);
+          }
         }
       }
 
     }
 
     return this.items;
-  }
-
-  updateBrie(item) {
-      this.incrementQuality(item);
   }
 
   updateSellIn(item) {
