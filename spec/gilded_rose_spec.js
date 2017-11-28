@@ -29,10 +29,23 @@ describe("Shop", function () {
         updatedItem = { name: 'foo', sellIn: 4, quality: 0};
         expect(shop.updateQuality()).toContain(updatedItem);        
       })
-      it('increases the quality of Brie', function () {
-        item.name = 'Aged Brie';
-        updatedItem = { name: 'Aged Brie', sellIn: 4, quality: 6 };        
-        expect(shop.updateQuality()).toContain(updatedItem);
+
+      describe('Aged Brie', function () {
+
+        beforeEach(function () {
+          item.name = 'Aged Brie';
+          item.quality = 49;  
+        })
+        
+        it('increases the quality of Brie', function () {
+          updatedItem = { name: 'Aged Brie', sellIn: 4, quality: 50 };        
+          expect(shop.updateQuality()).toContain(updatedItem);
+        })
+        it('will not allow thw quality to be greater than 50', function () {
+          updatedItem = { name: 'Aged Brie', sellIn: 4, quality: 50 };        
+          expect(shop.updateQuality()).toContain(updatedItem);
+        })
+
       })
 
       describe('Sulfuras', function () {
