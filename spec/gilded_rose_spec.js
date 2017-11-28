@@ -112,6 +112,12 @@ describe("Shop", function () {
         updatedItem = { name: 'foo', sellIn: -1, quality: 3 };
         expect(shop.updateQuality()).toContain(updatedItem);
       })
+      it('will not allow the quality to be negative', function () {
+        item.sellIn = -1;
+        item.quality = 0;
+        updatedItem = { name: 'foo', sellIn: -2, quality: 0};
+        expect(shop.updateQuality()).toContain(updatedItem);        
+      })
 
       describe('Backstage passes', function () {
 
@@ -131,6 +137,11 @@ describe("Shop", function () {
 
         it('increases the quality twice as fast', function () {
           updatedItem = { name: brie, sellIn: -1, quality: 7 };        
+          expect(shop.updateQuality()).toContain(updatedItem);
+        })
+        it('increases the quality twice as fast', function () {
+          item.quality = 49
+          updatedItem = { name: brie, sellIn: -1, quality: 50 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
 
