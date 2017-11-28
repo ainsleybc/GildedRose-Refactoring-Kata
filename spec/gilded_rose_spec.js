@@ -7,7 +7,7 @@ describe("Shop", function () {
   var item, updatedItem, shop, backStage, brie, sulfuras;
   
   beforeEach(function () {
-    item = { name: 'foo', quality: 5, sellIn: 5 };
+    item = { name: 'foo', sellIn: 5, quality: 5 };
     backStage = 'Backstage passes to a TAFKAL80ETC concert';    
     brie = 'Aged Brie';
     sulfuras = 'Sulfuras, Hand of Ragnaros';
@@ -45,8 +45,13 @@ describe("Shop", function () {
           updatedItem = { name: brie, sellIn: 4, quality: 6 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
-        it('will not allow thw quality to be greater than 50', function () {
+        it('will not allow the quality to be greater than 50', function () {
           item.quality = 49;            
+          updatedItem = { name: brie, sellIn: 4, quality: 50 };        
+          expect(shop.updateQuality()).toContain(updatedItem);
+        })
+        it('will not increase the quality if already > 50', function () {
+          item.quality = 50;            
           updatedItem = { name: brie, sellIn: 4, quality: 50 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
