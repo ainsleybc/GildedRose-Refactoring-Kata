@@ -21,6 +21,7 @@ class Shop {
         sellIn: 1
       },
       Backstage: {
+        dayLimits: [11, 6],
         qualityDecrease: 0,
         qualityIncrease: 1,
         zeroQuality: 1,
@@ -50,12 +51,9 @@ class Shop {
       } else {
           this.incrementQuality(item)
           if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
-            if (item.sellIn < 11) {
-                this.incrementQuality(item)
-            }
-            if (item.sellIn < 6) {
-                this.incrementQuality(item)
-            }
+            rule.dayLimits.forEach(function (limit) {
+              if (item.sellIn < limit) this.incrementQuality(item)  
+            }, this)
           }
       }
 
