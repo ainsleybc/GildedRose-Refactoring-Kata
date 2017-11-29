@@ -10,19 +10,19 @@ class DefaultItem extends Item {
     if (this.sellIn < 0) this._decrementQuality();    
   }
 
-  _updateSellIn(item) {
+  _updateSellIn() {
     this.sellIn--;
   }
 
-  _incrementQuality(times = 0) {
-    if (this.quality < 50) this.quality++;
+  _incrementQuality(count = 1) {
+    if (this.quality < 50) this.quality += count;
   }
 
-  _decrementQuality(times = 0) {
-    if (this.quality > 0) this.quality--;
+  _decrementQuality(count = 1) {
+    if (this.quality > 0) this.quality -= count;
   }
 
-  _zeroQuality(item) {
+  _zeroQuality() {
     this.quality = 0;
   }
 
