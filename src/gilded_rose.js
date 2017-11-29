@@ -30,17 +30,17 @@ class Shop {
       var itemCategory = item.name.split(/\s*\b\s*/)[0];
       var rule = this.itemRules[itemCategory] || this.itemRules.Default;
 
-      this.updateSellIn(item, rule);
-      this.executeRules(item, rule);
+      this._updateSellIn(item, rule);
+      this._executeRules(item, rule);
       if (rule.dayLimits) {
         rule.dayLimits.forEach((limit) => {
-          if (item.sellIn < limit) this.incrementQuality(item, 1)  
+          if (item.sellIn < limit) this._incrementQuality(item, 1)  
         }, this)
       }
 
       if (item.sellIn < 0) {
-        this.executeRules(item, rule);      
-        if (rule.zeroQuality) this.zeroQuality(item);  
+        this._executeRules(item, rule);      
+        if (rule.zeroQuality) this._zeroQuality(item);  
       }
 
     }
@@ -48,28 +48,28 @@ class Shop {
     return this.items;
   }
 
-  updateSellIn(item, rule) {
+  _updateSellIn(item, rule) {
     if (!rule.dontUpdateSellIn) item.sellIn--;
   }
 
-  executeRules(item, rule) {
-    this.decrementQuality(item, rule.qualityDecrease);
-    this.incrementQuality(item, rule.qualityIncrease)
+  _executeRules(item, rule) {
+    this._decrementQuality(item, rule.qualityDecrease);
+    this._incrementQuality(item, rule.qualityIncrease)
   } 
 
-  incrementQuality(item, times = 0) {
+  _incrementQuality(item, times = 0) {
     for (var i = 0; i < times; i++) {
       if (item.quality < 50) item.quality++;
     }
   }
 
-  decrementQuality(item, times = 0) {
+  _decrementQuality(item, times = 0) {
     for (var i = 0; i < times; i++) {  
       if (item.quality > 0) item.quality--;
     }  
   }
 
-  zeroQuality(item) {
+  _zeroQuality(item) {
     item.quality = 0;
   }
 
