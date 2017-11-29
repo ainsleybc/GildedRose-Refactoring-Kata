@@ -16,7 +16,7 @@ class Shop {
       },
       Backstage: {
         qualityIncrease: 1,
-        dayLimits: [11, 6],
+        dayBoundaries: [11, 6],
         zeroQuality: true
       }
     }
@@ -32,11 +32,7 @@ class Shop {
 
       this._updateSellIn(item, rule);
       this._executeRules(item, rule);
-      if (rule.dayLimits) {
-        rule.dayLimits.forEach((limit) => {
-          if (item.sellIn < limit) this._incrementQuality(item, 1)  
-        }, this)
-      }
+      this._applyDayRules(item, rule);
 
       if (item.sellIn < 0) {
         this._executeRules(item, rule);      
@@ -46,6 +42,14 @@ class Shop {
     }
 
     return this.items;
+  }
+
+  _applyDayRules(item, rule) {
+    if (rule.dayBoundaries) {
+      rule.dayBoundaries.forEach((limit) => {
+        if (item.sellIn < limit) this._executeRules(item, rule); 
+      }, this)
+    }
   }
 
   _updateSellIn(item, rule) {
