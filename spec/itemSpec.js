@@ -2,21 +2,21 @@
 
 const Item = require('../src/item').Item;
 
-describe('Item', function () {
+describe('Item', () => {
 
   var item;
 
-  beforeEach(function () {    
+  beforeEach(() => {    
     item = new Item('foo', 4, 6);
   })
 
-  it('can be initialized with name', function () {
+  it('can be initialized with name', () => {
     expect(item.name).toEqual('foo')
   })
-  it('can be initialized with a sellIn value', function () {
+  it('can be initialized with a sellIn value', () => {
     expect(item.sellIn).toEqual(4)
   })
-  it('can be initialized with a quality value', function () {
+  it('can be initialized with a quality value', () => {
     expect(item.quality).toEqual(6)
   })
   
