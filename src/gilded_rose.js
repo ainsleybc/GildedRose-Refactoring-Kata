@@ -39,12 +39,8 @@ class Shop {
 
       var rule = this.itemRules[itemCategory] || this.itemRules.Default;
 
-        for (var i = 0; i < rule.sellIn; i++) {
-          this.updateSellIn(item);
-        }
-        for (var i = 0; i < rule.qualityDecrease; i++) {
-          this.decrementQuality(item);
-        }
+        this.updateSellIn(item, rule.sellIn);
+        this.decrementQuality(item, rule.qualityDecrease);
         for (var i = 0; i < rule.qualityIncrease; i++) {
           this.incrementQuality(item)
         }
@@ -56,9 +52,7 @@ class Shop {
 
       if (item.sellIn < 0) {
         if (item.name != 'Aged Brie') {
-            for (var i = 0; i < rule.qualityDecrease; i++) {
-              this.decrementQuality(item);
-            }
+              this.decrementQuality(item, rule.qualityDecrease);
             if (rule.zeroQuality) {
               for (var i = 0; i < rule.zeroQuality; i++) {
                 this.zeroQuality(item);
@@ -76,16 +70,20 @@ class Shop {
     return this.items;
   }
 
-  updateSellIn(item) {
-    item.sellIn--;
+  updateSellIn(item, times) {
+    for (var i = 0; i < times; i++) {
+      item.sellIn--;
+    }
   }
 
   incrementQuality(item) {
     if (item.quality < 50) item.quality++;   
   }
 
-  decrementQuality(item) {
-    if (item.quality > 0) item.quality--;
+  decrementQuality(item, times) {
+    for (var i = 0; i < times; i++) {  
+      if (item.quality > 0) item.quality--;
+    }  
   }
 
   zeroQuality(item) {
