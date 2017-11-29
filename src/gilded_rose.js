@@ -7,19 +7,14 @@ class Shop {
     this.itemRules = {
       Default: {
         qualityDecrease: 1,
-        qualityIncrease: 0,
       },
       "Sulfuras,": {
-        qualityDecrease: 0,
-        qualityIncrease: 0,
         sellIn: false
       },
       Aged: {
-        qualityDecrease: 0,
         qualityIncrease: 1,
       },
       Backstage: {
-        qualityDecrease: 0,
         qualityIncrease: 1,
         dayLimits: [11, 6],
         zeroQuality: true
@@ -62,13 +57,13 @@ class Shop {
     this.incrementQuality(item, rule.qualityIncrease)
   } 
 
-  incrementQuality(item, times) {
+  incrementQuality(item, times = 0) {
     for (var i = 0; i < times; i++) {
       if (item.quality < 50) item.quality++;
     }
   }
 
-  decrementQuality(item, times) {
+  decrementQuality(item, times = 0) {
     for (var i = 0; i < times; i++) {  
       if (item.quality > 0) item.quality--;
     }  
