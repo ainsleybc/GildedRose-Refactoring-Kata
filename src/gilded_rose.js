@@ -36,8 +36,7 @@ class Shop {
       var rule = this.itemRules[itemCategory] || this.itemRules.Default;
 
       this.updateSellIn(item, rule.sellIn);
-      this.decrementQuality(item, rule.qualityDecrease);
-      this.incrementQuality(item, rule.qualityIncrease)
+      this.executeRules(item, rule);
       if (rule.dayLimits) {
         rule.dayLimits.forEach((limit) => {
           if (item.sellIn < limit) this.incrementQuality(item, 1)  
@@ -45,8 +44,7 @@ class Shop {
       }
 
       if (item.sellIn < 0) {
-        this.decrementQuality(item, rule.qualityDecrease);
-        this.incrementQuality(item, rule.qualityIncrease);
+        this.executeRules(item, rule);      
         if (rule.zeroQuality) this.zeroQuality(item);  
       }
 
@@ -58,6 +56,11 @@ class Shop {
   updateSellIn(item, update = true) {
     if (update) item.sellIn--;
   }
+
+  executeRules(item, rule) {
+    this.decrementQuality(item, rule.qualityDecrease);
+    this.incrementQuality(item, rule.qualityIncrease)
+  } 
 
   incrementQuality(item, times) {
     for (var i = 0; i < times; i++) {
