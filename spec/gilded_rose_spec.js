@@ -19,24 +19,17 @@ describe("Shop", () => {
   it('initializes with an empty list of items', () => {
     expect(new Shop().items).toEqual([]);
   })
-
+  
   describe('updateQuality', () => {
+    
+    it('updates each item in the list', () => {
+      item = jasmine.createSpyObj('default', ['updateQuality'])
+      shop = new Shop([item]);    
+      shop.updateQuality()
+      expect(item.updateQuality).toHaveBeenCalled();
+    })
 
     describe('given that the sell by date has not passed', () => {
-
-      it('reduces the sellIn value by 1', () => {
-        updatedItem = { name: 'foo', sellIn: 4, quality: 4 };      
-        expect(shop.updateQuality()).toContain(updatedItem);
-      })
-      it('reduces the quality of an item by 1', () => {
-        updatedItem = { name: 'foo', sellIn: 4, quality: 4 };
-        expect(shop.updateQuality()).toContain(updatedItem);
-      })
-      it('will not allow the quality to be negative', () => {
-        item.quality = 0;
-        updatedItem = { name: 'foo', sellIn: 4, quality: 0};
-        expect(shop.updateQuality()).toContain(updatedItem);     
-      })
 
       describe('Aged Brie', () => {
 
@@ -119,17 +112,6 @@ describe("Shop", () => {
     describe('given that the sell by date has been reached', () => {
       
       beforeEach(() => { item.sellIn = 0; })
-
-      it('reduces the quality of an item twice as fast', () => {
-        updatedItem = { name: 'foo', sellIn: -1, quality: 3 };
-        expect(shop.updateQuality()).toContain(updatedItem);
-      })
-      it('will not allow the quality to be negative', () => {
-        item.sellIn = -1;
-        item.quality = 0;
-        updatedItem = { name: 'foo', sellIn: -2, quality: 0};
-        expect(shop.updateQuality()).toContain(updatedItem);        
-      })
 
       describe('Backstage passes', () => {
 
