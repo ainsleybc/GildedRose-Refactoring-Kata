@@ -8,7 +8,7 @@ class Shop {
       Default: {
         qualityDecrease: 1,
       },
-      "Sulfuras,": {
+      Sulfuras: {
         dontUpdateSellIn: true
       },
       Aged: {
@@ -27,7 +27,7 @@ class Shop {
     for (var i = 0; i < this.items.length; i++) {
 
       var item = this.items[i];
-      var itemCategory = item.name.split(' ')[0];
+      var itemCategory = item.name.split(/\s*\b\s*/)[0];
       var rule = this.itemRules[itemCategory] || this.itemRules.Default;
 
       this.updateSellIn(item, rule);
