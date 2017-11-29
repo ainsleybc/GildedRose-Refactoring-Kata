@@ -47,57 +47,12 @@ describe("Shop", () => {
 
       })
 
-      describe('Backstage passes', () => {
-
-        beforeEach(() => { item.name = backStage; })     
-
-        it('increases the quality of Backstage passes by 2 if sellIn < 10', () => {
-          item.sellIn = 7;
-          updatedItem = { name: backStage, sellIn: 6, quality: 7 };        
-          expect(shop.updateQuality()).toContain(updatedItem);
-        })
-        it('increases the quality of Backstage passes by 3 if sellIn < 5', () => {
-          updatedItem = { name: backStage, sellIn: 4, quality: 8 };        
-          expect(shop.updateQuality()).toContain(updatedItem);
-        })
-        it('will not allow thw quality to be greater than 50', () => {
-          item.quality = 49;
-          updatedItem = { name: backStage, sellIn: 4, quality: 50 };        
-          expect(shop.updateQuality()).toContain(updatedItem);
-        })
-        it('decrease quality if sellIn > 10', () => {
-          item.sellIn = 12;
-          item.quality = 5;
-          updatedItem = { name: backStage, sellIn: 11, quality: 6 };        
-          expect(shop.updateQuality()).toContain(updatedItem);
-        })
-
-      })
-
       describe('Conjured', () => {
         
         beforeEach(() => { item.name = conjured; })
         
         it('degrades twice as fast as normal items', () => {
           updatedItem = { name: conjured, sellIn: 4, quality: 3 };        
-          expect(shop.updateQuality()).toContain(updatedItem);
-        })
-
-      })
-
-    })
-
-    describe('given that the sell by date has been reached', () => {
-      
-      beforeEach(() => { item.sellIn = 0; })
-
-      describe('Backstage passes', () => {
-
-        beforeEach(() => { item.name = backStage; })     
-        
-        it('reduces the quality to 0', () => {
-          item.sellIn = 0;
-          updatedItem = { name: backStage, sellIn: -1, quality: 0 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
 
