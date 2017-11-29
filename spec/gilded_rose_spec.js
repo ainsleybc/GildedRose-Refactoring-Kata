@@ -4,9 +4,8 @@ const Shop = require('../src/gilded_rose').Shop;
 
 describe("Shop", () => {
   
-  var item, updatedItem, shop, backStage, brie, sulfuras, conjured;
+  var item, updatedItem, shop, backStage, sulfuras, conjured;
   
-  brie      = 'Aged Brie';
   sulfuras  = 'Sulfuras, Hand of Ragnaros';
   backStage = 'Backstage passes to a TAFKAL80ETC concert';    
   conjured  = 'Conjured';
@@ -30,27 +29,6 @@ describe("Shop", () => {
     })
 
     describe('given that the sell by date has not passed', () => {
-
-      describe('Aged Brie', () => {
-
-        beforeEach(() => { item.name = brie; })
-
-        it('increases the quality of Brie', () => {
-          updatedItem = { name: brie, sellIn: 4, quality: 6 };        
-          expect(shop.updateQuality()).toContain(updatedItem);
-        })
-        it('will not allow the quality to be greater than 50', () => {
-          item.quality = 49;            
-          updatedItem = { name: brie, sellIn: 4, quality: 50 };        
-          expect(shop.updateQuality()).toContain(updatedItem);
-        })
-        it('will not increase the quality if already > 50', () => {
-          item.quality = 50;            
-          updatedItem = { name: brie, sellIn: 4, quality: 50 };        
-          expect(shop.updateQuality()).toContain(updatedItem);
-        })
-
-      })
 
       describe('Sulfuras', () => {
         
@@ -120,22 +98,6 @@ describe("Shop", () => {
         it('reduces the quality to 0', () => {
           item.sellIn = 0;
           updatedItem = { name: backStage, sellIn: -1, quality: 0 };        
-          expect(shop.updateQuality()).toContain(updatedItem);
-        })
-
-      })
-
-      describe('Aged Brie', () => {
-
-        beforeEach(() => { item.name = brie; })    
-
-        it('increases the quality twice as fast', () => {
-          updatedItem = { name: brie, sellIn: -1, quality: 7 };        
-          expect(shop.updateQuality()).toContain(updatedItem);
-        })
-        it('increases the quality twice as fast', () => {
-          item.quality = 49
-          updatedItem = { name: brie, sellIn: -1, quality: 50 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
 

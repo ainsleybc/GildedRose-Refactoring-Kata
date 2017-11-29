@@ -5,15 +5,15 @@ class Shop {
   constructor(items=[]){
     this.items = items;
     this.itemRules = {
-      Default: {
-        qualityDecrease: 1,
-      },
+      // Default: {
+      //   qualityDecrease: 1,
+      // },
       Sulfuras: {
         dontUpdateSellIn: true
       },
-      Aged: {
-        qualityIncrease: 1,
-      },
+      // Aged: {
+      //   qualityIncrease: 1,
+      // },
       Backstage: {
         qualityIncrease: 1,
         dayBoundaries: [11, 6],
