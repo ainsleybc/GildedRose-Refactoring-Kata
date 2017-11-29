@@ -8,22 +8,19 @@ class Shop {
       Default: {
         qualityDecrease: 1,
         qualityIncrease: 0,
-        sellIn: 1
       },
       "Sulfuras,": {
         qualityDecrease: 0,
         qualityIncrease: 0,
-        sellIn: 0
+        sellIn: false
       },
       Aged: {
         qualityDecrease: 0,
         qualityIncrease: 1,
-        sellIn: 1
       },
       Backstage: {
         qualityDecrease: 0,
         qualityIncrease: 1,
-        sellIn: 1,
         dayLimits: [11, 6],
         zeroQuality: true
       }
@@ -58,10 +55,8 @@ class Shop {
     return this.items;
   }
 
-  updateSellIn(item, times) {
-    for (var i = 0; i < times; i++) {
-      item.sellIn--;
-    }
+  updateSellIn(item, update = true) {
+    if (update) item.sellIn--;
   }
 
   incrementQuality(item, times) {
