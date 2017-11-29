@@ -25,7 +25,7 @@ class Shop {
         qualityIncrease: 1,
         sellIn: 1,
         dayLimits: [11, 6],
-        zeroQuality: 1
+        zeroQuality: true
       }
     }
   }
@@ -36,27 +36,21 @@ class Shop {
 
       var item = this.items[i];
       var itemCategory = item.name.split(' ')[0];
-
       var rule = this.itemRules[itemCategory] || this.itemRules.Default;
 
-        this.updateSellIn(item, rule.sellIn);
-        this.decrementQuality(item, rule.qualityDecrease);
-        this.incrementQuality(item, rule.qualityIncrease)
-        if (rule.dayLimits) {
-          rule.dayLimits.forEach(function (limit) {
-            if (item.sellIn < limit) this.incrementQuality(item, 1)  
-          }, this)
-        }
+      this.updateSellIn(item, rule.sellIn);
+      this.decrementQuality(item, rule.qualityDecrease);
+      this.incrementQuality(item, rule.qualityIncrease)
+      if (rule.dayLimits) {
+        rule.dayLimits.forEach((limit) => {
+          if (item.sellIn < limit) this.incrementQuality(item, 1)  
+        }, this)
+      }
 
       if (item.sellIn < 0) {
-        if (item.name != 'Aged Brie') {
-              this.decrementQuality(item, rule.qualityDecrease);
-            if (rule.zeroQuality) {
-                this.zeroQuality(item);
-            }  
-        } else {
-          this.incrementQuality(item, rule.qualityIncrease);
-        }
+        this.decrementQuality(item, rule.qualityDecrease);
+        this.incrementQuality(item, rule.qualityIncrease);
+        if (rule.zeroQuality) this.zeroQuality(item);  
       }
 
     }
