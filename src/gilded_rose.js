@@ -25,7 +25,6 @@ class Shop {
   updateQuality() {
 
     for (var i = 0; i < this.items.length; i++) {
-
       var item = this.items[i];
       var itemCategory = item.name.split(/\s*\b\s*/)[0];
       var rule = this.itemRules[itemCategory] || this.itemRules.Default;
@@ -33,15 +32,17 @@ class Shop {
       this._updateSellIn(item, rule);
       this._executeRules(item, rule);
       this._applyDayRules(item, rule);
-
-      if (item.sellIn < 0) {
-        this._executeRules(item, rule);      
-        if (rule.zeroQuality) this._zeroQuality(item);  
-      }
-
+      this._applyExpirationRules(item, rule);
     }
 
     return this.items;
+  }
+
+  _applyExpirationRules(item, rule) {
+    if (item.sellIn < 0) {
+      this._executeRules(item, rule);      
+      if (rule.zeroQuality) this._zeroQuality(item);  
+    }
   }
 
   _applyDayRules(item, rule) {
