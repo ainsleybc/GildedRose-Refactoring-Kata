@@ -16,6 +16,7 @@ Writing the test cases gave me an understanding of the flow of the code and what
 
 My general approach was to write a new method, encapsulating some behaviour (without changing the existing code) and ensuring all tests were still passing. If still green, I'd then swap out the existing code for the new method and run the tests again; if green, commit and repeat, otherwise revert the changes and start again.
 
+As a final refactor, I was then able to TDD the extraction of the different types of items into separate classes, using a default type as a parent class for other types and inheriting from Item.
 ## Install
 
 ```
