@@ -18,7 +18,10 @@ class Shop {
         qualityIncrease: 1,
         dayBoundaries: [11, 6],
         zeroQuality: true
-      }
+      },
+      Conjured: {
+        qualityDecrease: 2,
+      },
     }
   }
 

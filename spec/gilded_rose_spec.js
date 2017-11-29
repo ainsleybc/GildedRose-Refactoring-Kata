@@ -4,13 +4,14 @@ const Shop = require('../src/gilded_rose').Shop;
 
 describe("Shop", function () {
   
-  var item, updatedItem, shop, backStage, brie, sulfuras;
+  var item, updatedItem, shop, backStage, brie, sulfuras, conjured;
   
   beforeEach(function () {
     item = { name: 'foo', sellIn: 5, quality: 5 };
     backStage = 'Backstage passes to a TAFKAL80ETC concert';    
     brie = 'Aged Brie';
     sulfuras = 'Sulfuras, Hand of Ragnaros';
+    conjured = 'Conjured';
     shop = new Shop([item]);
   })
 
@@ -97,6 +98,17 @@ describe("Shop", function () {
           item.sellIn = 12;
           item.quality = 5;
           updatedItem = { name: backStage, sellIn: 11, quality: 6 };        
+          expect(shop.updateQuality()).toContain(updatedItem);
+        })
+
+      })
+
+      describe('Conjured', function () {
+        
+        beforeEach(() => { item.name = conjured; })
+        
+        it('degrades twice as fast as normal items', function () {
+          updatedItem = { name: conjured, sellIn: 4, quality: 3 };        
           expect(shop.updateQuality()).toContain(updatedItem);
         })
 
