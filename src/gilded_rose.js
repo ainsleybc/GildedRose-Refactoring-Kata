@@ -9,7 +9,7 @@ class Shop {
         qualityDecrease: 1,
       },
       "Sulfuras,": {
-        sellIn: false
+        dontUpdateSellIn: true
       },
       Aged: {
         qualityIncrease: 1,
@@ -30,7 +30,7 @@ class Shop {
       var itemCategory = item.name.split(' ')[0];
       var rule = this.itemRules[itemCategory] || this.itemRules.Default;
 
-      this.updateSellIn(item, rule.sellIn);
+      this.updateSellIn(item, rule);
       this.executeRules(item, rule);
       if (rule.dayLimits) {
         rule.dayLimits.forEach((limit) => {
@@ -48,8 +48,8 @@ class Shop {
     return this.items;
   }
 
-  updateSellIn(item, update = true) {
-    if (update) item.sellIn--;
+  updateSellIn(item, rule) {
+    if (!rule.dontUpdateSellIn) item.sellIn--;
   }
 
   executeRules(item, rule) {
