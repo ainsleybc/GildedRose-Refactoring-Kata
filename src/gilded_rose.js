@@ -28,27 +28,27 @@ class Shop {
   updateQuality() {
 
     for (var i = 0; i < this.items.length; i++) {
-      var item = this.items[i];
-      var itemCategory = item.name.split(/\s*\b\s*/)[0];
-      var rule = this.itemRules[itemCategory] || this.itemRules.Default;
+      var item        = this.items[i],
+        itemCategory  = item.name.split(/\s*\b\s*/)[0],
+        rule          = this.itemRules[itemCategory] || this.itemRules.Default;
 
       this._updateSellIn(item, rule);
       this._executeRules(item, rule);
-      this._applyDayRules(item, rule);
-      this._applyExpirationRules(item, rule);
+      this._executeDayBoundaryRules(item, rule);
+      this._executeExpirationRules(item, rule);
     }
 
     return this.items;
   }
 
-  _applyExpirationRules(item, rule) {
+  _executeExpirationRules(item, rule) {
     if (item.sellIn < 0) {
       this._executeRules(item, rule);      
       if (rule.zeroQuality) this._zeroQuality(item);  
     }
   }
 
-  _applyDayRules(item, rule) {
+  _executeDayBoundaryRules(item, rule) {
     if (rule.dayBoundaries) {
       rule.dayBoundaries.forEach((limit) => {
         if (item.sellIn < limit) this._executeRules(item, rule); 

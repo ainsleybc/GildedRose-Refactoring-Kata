@@ -6,10 +6,10 @@ describe("Shop", () => {
   
   var item, updatedItem, shop, backStage, brie, sulfuras, conjured;
   
-  brie = 'Aged Brie';
-  sulfuras = 'Sulfuras, Hand of Ragnaros';
+  brie      = 'Aged Brie';
+  sulfuras  = 'Sulfuras, Hand of Ragnaros';
   backStage = 'Backstage passes to a TAFKAL80ETC concert';    
-  conjured = 'Conjured';
+  conjured  = 'Conjured';
 
   beforeEach(() => {
     item = { name: 'foo', sellIn: 5, quality: 5 };
@@ -21,12 +21,11 @@ describe("Shop", () => {
   })
 
   describe('updateQuality', () => {
-    
 
     describe('given that the sell by date has not passed', () => {
 
       it('reduces the sellIn value by 1', () => {
-        updatedItem = { name: 'foo', sellIn: 4, quality: 4};        
+        updatedItem = { name: 'foo', sellIn: 4, quality: 4 };      
         expect(shop.updateQuality()).toContain(updatedItem);
       })
       it('reduces the quality of an item by 1', () => {
@@ -36,7 +35,7 @@ describe("Shop", () => {
       it('will not allow the quality to be negative', () => {
         item.quality = 0;
         updatedItem = { name: 'foo', sellIn: 4, quality: 0};
-        expect(shop.updateQuality()).toContain(updatedItem);        
+        expect(shop.updateQuality()).toContain(updatedItem);     
       })
 
       describe('Aged Brie', () => {
